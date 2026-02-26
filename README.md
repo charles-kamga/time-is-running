@@ -1,42 +1,86 @@
-# Time Is Running
+# ⏳ Time Is Running
 
-Une page web minimaliste qui visualise le temps restant dans l'année à travers une grille de points.
+## 📌 Description
 
-## 🎯 Concept
+Time Is Running est un générateur de fond d'écran dynamique conçu pour iPhone.
+Il transforme le temps qui passe en signal visuel permanent, afin de renforcer la conscience du temps et stimuler la productivité personnelle.
 
-**Time Is Running** est un outil de visualisation du temps qui affiche les 365 jours de l'année sous forme de points :
-- **Points blancs** : jours restants dans l'année
-- **Points gris** : jours déjà écoulés
+Le principe est simple :
+- Chaque point représente un jour
+- Chaque point qui disparaît représente du temps perdu
 
-Le design est épuré et direct, créé pour servir de fond d'écran ou de page de rappel temporel.
+## 🎯 Objectif du projet
 
-## ✨ Fonctionnalités
+Ce projet vise à :
+- **Rendre le temps visible et tangible**
+- **Créer une pression psychologique douce mais constante**
+- **Éviter les rappels intrusifs** (notifications, alarmes)
+- **Exploiter un simple fond d'écran comme outil de discipline personnelle**
 
-- **Visualisation instantanée** : Grille de 20×18 points représentant l'année complète
-- **Mise à jour automatique** : Calcul en temps réel des jours restants jusqu'au 31 décembre
-- **Design minimaliste** : Interface noir et blanc optimisée pour la concentration
-- **Responsive** : Adapté à tous les écrans, particulièrement optimisé pour mobile
-- **Message motivant** : Phrase d'impact sur le temps qui passe
+L'utilisateur est confronté, à chaque déverrouillage du téléphone, à la réalité du temps restant dans l'année.
 
-## 🚀 Utilisation
+## 🧠 Principe de fonctionnement
 
-1. **Ouvrir le fichier** : Double-cliquez sur `index.html` dans votre navigateur
+Le projet repose sur une page web statique (HTML / CSS / JavaScript), sans backend ni API.
+
+### 1. Calcul du temps
+- La date courante est récupérée depuis le téléphone
+- L'heure est normalisée à minuit pour garantir un changement de jour précis
+- Le nombre de jours restants jusqu'au 31 décembre est calculé dynamiquement
+
+### 2. Représentation visuelle
+- L'année est représentée par 365 points
+- Les points blancs représentent les jours restants
+- Les points gris représentent les jours écoulés
+- Le rendu est minimaliste pour maximiser l'impact visuel
+
+### 3. Mise à jour automatique
+- Le calcul est effectué à chaque chargement de la page
+- Une automatisation iOS peut être utilisée pour :
+  - ouvrir la page
+  - capturer l'écran
+  - définir l'image comme fond d'écran
+
+Le fond d'écran est ainsi mis à jour quotidiennement sans intervention manuelle.
+
+## 📱 Utilisation prévue
+
+Ce projet est particulièrement adapté pour :
+- **iPhone** (via l'app Raccourcis)
+- **Écrans OLED** (fond noir → économie de batterie)
+- **Utilisateurs cherchant à :**
+  - mieux gérer leur temps
+  - rester focalisés sur leurs objectifs
+  - visualiser la progression (ou la perte) du temps
+
+## 🚀 Installation et utilisation
+
+1. **Ouvrir la page** : Accédez à `index.html` dans votre navigateur
 2. **Visualiser** : La grille s'affiche automatiquement avec les jours restants en blanc
-3. **Utiliser comme fond d'écran** : Capturez d'écran ou utilisez la page directement
+3. **Automatisation iOS** : Utilisez l'app Raccourcis pour :
+   - Ouvrir la page web
+   - Capturer l'écran
+   - Définir comme fond d'écran
+   - Programmer l'exécution quotidienne
 
-## 🛠️ Technique
+## 🛠️ Technologies utilisées
 
-- **Langage** : HTML5 pur avec JavaScript vanilla
-- **Style** : CSS3 avec Grid Layout et Flexbox
-- **Compatibilité** : Tous les navigateurs modernes
-- **Performance** : Léger et instantané
+- **HTML5** — structure de la page
+- **CSS3** — mise en page et design minimaliste
+- **JavaScript (vanilla)** — calcul du temps et génération dynamique
+- **Hébergement statique** via GitHub Pages
 
-## 📱 Optimisation Mobile
+## 🔒 Choix techniques
 
-- Police système Apple pour une cohérence parfaite avec iOS
-- Fond noir pour économie de batterie sur écrans OLED
-- Interface tactile optimisée
-- Pas de dépendances externes
+- **Aucun framework** (simplicité, rapidité, fiabilité)
+- **Aucun appel réseau**
+- **Aucune donnée utilisateur collectée**
+- **Dépend uniquement de l'heure locale du téléphone**
+
+Ces choix garantissent :
+- **Stabilité**
+- **Confidentialité**
+- **Compatibilité maximale**
 
 ## 🎨 Design
 
@@ -44,6 +88,7 @@ Le design est épuré et direct, créé pour servir de fond d'écran ou de page 
 - **Couleurs** : Noir (#000), blanc (#fff), gris (#333)
 - **Typographie** : Police système sans-serif
 - **Grille** : 20 colonnes × 18-19 lignes (365 points)
+- **Message** : "Le temps ne négocie pas."
 
 ## 📊 Calcul
 
@@ -52,17 +97,27 @@ Le temps restant est calculé comme :
 jours_restants = ⌊(31_décembre - aujourd'hui) / 86_400_000⌋
 ```
 
-## 🔧 Personnalisation
+## 🧩 Personnalisation possible
 
-Pour modifier :
-- **Total de jours** : Changez `TOTAL_DAYS` dans le JavaScript
-- **Date de fin** : Modifiez la variable `end`
-- **Couleurs** : Ajustez les valeurs CSS dans les classes `.dot` et `.active`
-- **Message** : Éditez le `textContent` final
+Le code peut facilement être adapté pour :
+- **Date cible personnalisée** (examen, projet, objectif)
+- **Message psychologique différent**
+- **Nombre de points différent**
+- **Thème visuel différent**
+- **Usage sur desktop ou tablette**
+
+## ⚠️ Limites connues
+
+- iOS impose parfois une confirmation lors du changement de fond d'écran
+- L'année est fixée à 365 jours (les années bissextiles ne sont pas prises en compte par choix de simplicité)
 
 ## 📄 Licence
 
-Projet personnel - utilisation libre et open source.
+Projet personnel, libre d'utilisation et de modification à des fins éducatives ou personnelles.
+
+## ✍️ Auteur
+
+Conçu comme un outil de discipline personnelle, et non comme un produit commercial.
 
 ---
 
