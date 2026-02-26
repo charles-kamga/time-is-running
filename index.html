@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!--
+        Titre de la page.
+        Peu visible sur iPhone, mais utile pour le debug
+        et pour l'identification du projet.
+    -->
+    <title>Time Is Running</title>
+
+    <style>
+        /*
+        =========================
+        STYLE GLOBAL DE LA PAGE
+        =========================
+        */
+
+        body {
+            /*
+            Supprime les marges par défaut du navigateur
+            pour utiliser tout l'écran.
+            */
+            margin: 0;
+
+            /*
+            Fond noir :
+            - meilleur contraste
+            - moins distrayant
+            - économie de batterie (OLED)
+            */
+            background-color: #000;
+
+            /*
+            Texte blanc pour contraste maximal
+            */
+            color: white;
+
+            /*
+            Police système Apple :
+            cohérence parfaite avec iOS
+            */
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /*
+            Flexbox pour centrer le contenu
+            verticalement et horizontalement
+            */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            /*
+            Hauteur totale de l'écran
+            */
+            height: 100vh;
+        }
+
+        /*
+        =========================
+        CONTENEUR DES POINTS
+        =========================
+        */
+        #dots {
+            /*
+            Grille CSS :
+            - 20 colonnes fixes
+            - chaque point est une "cellule"
+            */
+            display: grid;
+            grid-template-columns: repeat(20, 10px);
+
+            /*
+            Espacement entre les points
+            */
+            gap: 6px;
+
+            /*
+            Espace entre la grille
+            et le texte en dessous
+            */
+            margin-bottom: 30px;
+        }
+
+        /*
+        =========================
+        STYLE D’UN POINT
+        =========================
+        */
+        .dot {
+            /*
+            Taille du point
+            */
+            width: 10px;
+            height: 10px;
+
+            /*
+            Cercle parfait
+            */
+            border-radius: 50%;
+
+            /*
+            Couleur par défaut :
+            jour écoulé / perdu
+            */
+            background-color: #333;
+        }
+
+        /*
+        =========================
+        POINT ACTIF
+        (jour restant)
+        =========================
+        */
+        .active {
+            /*
+            Blanc pur :
+            attire l’œil immédiatement
+            */
+            background-color: #fff;
+        }
+
+        /*
+        =========================
+        TEXTE DE MESSAGE
+        =========================
+        */
+        h1 {
+            /*
+            Taille modérée :
+            visible mais pas envahissante
+            */
+            font-size: 20px;
+
+            /*
+            Centrage du texte
+            */
+            text-align: center;
+
+            /*
+            Légère transparence
+            pour un effet plus sobre
+            */
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--
+        Conteneur vide :
+        les points seront créés
+        dynamiquement en JavaScript
+    -->
+    <div id="dots"></div>
+
+    <!--
+        Message dynamique
+        mis à jour par le script
+    -->
+    <h1 id="message"></h1>
+
+    <script>
+        /*
+        =========================
+        GESTION DU TEMPS
+        =========================
+        */
+
+        // Date actuelle du téléphone
+        const today = new Date();
+
+        /*
+        IMPORTANT :
+        On force l’heure à 00:00:00
+        pour éviter les erreurs liées à l’heure courante.
+        Le changement de jour devient net à minuit.
+        */
+        today.setHours(0, 0, 0, 0);
+
+        /*
+        Date de fin :
+        31 décembre de l’année en cours
+        (mois 11 = décembre car les mois commencent à 0)
+        */
+        const end = new Date(today.getFullYear(), 11, 31);
+        end.setHours(0, 0, 0, 0);
+
+        /*
+        Nombre total de jours dans l’année.
+        On reste volontairement à 365
+        (simplicité + impact visuel).
+        */
+        const TOTAL_DAYS = 365;
+
+        /*
+        Calcul du nombre de jours restants :
+        - différence en millisecondes
+        - conversion en jours (1 jour = 86 400 000 ms)
+        */
+        const remainingDays =
+            Math.round((end - today) / 86400000);
+
+        /*
+        =========================
+        GÉNÉRATION DES POINTS
+        =========================
+        */
+
+        // Récupération du conteneur HTML
+        const dotsContainer = document.getElementById("dots");
+
+        /*
+        Boucle principale :
+        - crée 365 points
+        - les premiers sont "actifs"
+        - les autres sont "perdus"
+        */
+        for (let i = 0; i < TOTAL_DAYS; i++) {
+
+            // Création d’un élément div
+            const dot = document.createElement("div");
+
+            // Classe de base (point gris)
+            dot.classList.add("dot");
+
+            /*
+            Si l’index du point est inférieur
+            au nombre de jours restants,
+            alors le point est actif (blanc).
+            */
+            if (i < remainingDays) {
+                dot.classList.add("active");
+            }
+
+            // Ajout du point au conteneur
+            dotsContainer.appendChild(dot);
+        }
+
+        /*
+        =========================
+        MESSAGE PSYCHOLOGIQUE
+        =========================
+        */
+
+        // Récupération de l’élément texte
+        const message = document.getElementById("message");
+
+        /*
+        Message volontairement direct :
+        - pas de chiffres inutiles
+        - pression mentale contrôlée
+        */
+        message.textContent =
+            `${remainingDays} jours restants. Le temps ne négocie pas.`;
+    </script>
+
+</body>
+
+</html>
